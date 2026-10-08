@@ -1,0 +1,1 @@
+{"name":"hunter-broker-server","version":"1.0.0","description":"Shared simulated price and candle API plus web app","main":"server.js","scripts":{"start":"node server.js","bot":"node bot-example.js"},"engines":{"node":">=18"},"license":"UNLICENSED","private":true}
