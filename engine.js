@@ -1,6 +1,7 @@
 // Hunter Broker price engine (simulated prices). Generated from the web app code.
 module.exports=(function(){
-const A=(n,full,cat,p,d,v,pay,otc)=>({n,full,cat,p,d,v,pay,otc:!!otc,wp:otc?.03:.015,gp:otc?.03:.015,pbT:0,pbD:0,fd:0,sn:0,ss:0,sl:5,mp:undefined,sw:otc?.015:.008,ar:otc?.15:.05,tw:otc?.75:1,ld:0,rev:0,pay5:Math.round(Math.max(.5,pay-.01+Math.random()*.04)*100)/100,pmin:otc?.80:cat==='Exotic'?.74:.76,pmax:otc?.95:cat==='Exotic'?.86:.90,pip:d>=5||d===4?1e-4:.01,tr:0,vm:1,s:50,mode:"",until:0,age:0,lo:0,hi:0,dr:0,imp:0,pc:0});
+let rngf=Math.random;
+const A=(n,full,cat,p,d,v,pay,otc)=>({n,full,cat,p,d,v,pay,otc:!!otc,wp:otc?.03:.015,gp:otc?.03:.015,pbT:0,pbD:0,fd:0,sn:0,ss:0,sl:5,mp:undefined,sw:otc?.015:.008,ar:otc?.15:.05,tw:otc?.75:1,ld:0,rev:0,pay5:Math.round(Math.max(.5,pay-.01+rngf()*.04)*100)/100,pmin:otc?.80:cat==='Exotic'?.74:.76,pmax:otc?.95:cat==='Exotic'?.86:.90,pip:d>=5||d===4?1e-4:.01,tr:0,vm:1,s:50,mode:"",until:0,age:0,lo:0,hi:0,dr:0,imp:0,pc:0});
 const R=(n,full,cat,p,d,v,pay)=>A(n,full,cat,p,d,v,pay,false);
 const O=(n,full,p,d,v,pay)=>A(n+" (OTC)",full+" OTC","OTC",p,d,v*1.8,pay,true);
 const list=[
@@ -54,10 +55,11 @@ const C=(n,full,cat,p,d,v,pay)=>A(n+" (OTC)",full+" OTC",cat,p,d,v,pay,true);
 list.push(C("Bitcoin","Bitcoin / US Dollar","Crypto",84500,2,2.5e-5,.72),C("Ethereum","Ethereum / US Dollar","Crypto",2400,2,3e-5,.78),C("Gold","Gold / US Dollar","Commodity",4100,2,1.4e-5,.80),C("Silver","Silver / US Dollar","Commodity",58,3,2.2e-5,.78),C("Brent Oil","Brent Crude Oil","Commodity",80,3,2e-5,.76));
 const assets={};list.forEach(a=>assets[a.n]=a);
 let cur="USD/IDR (OTC)",tf=60;
-function rnd(){return Math.random()+Math.random()+Math.random()-1.5}
+function rnd(){return rngf()+rngf()+rngf()-1.5}
 /* OTC-style regime engine: range -> squeeze -> breakout/trend -> range ... */
 function newRegime(a,p){
-  const sd=p*a.v*7.7,r=Math.random(),pm=a.mode,o=a.otc;let m;
+  rngf=a.rng||Math.random;
+  const sd=p*a.v*7.7,r=rngf(),pm=a.mode,o=a.otc;let m;
   if(!pm)m="range";
   else if(pm==="range")m=r<(o?.34:.5)?"trend":r<(o?.46:.65)?"sq":"range";
   else if(pm==="sq")m=r<.55?"trend":"range";
@@ -65,54 +67,56 @@ function newRegime(a,p){
   if(m==="trend"){
     let dir;
     if(pm==="up"||pm==="down")dir=a.dr>0?-1:1;
-    else{dir=p>(a.lo+a.hi)/2?1:-1;if(Math.random()<.35)dir=-dir}
-    a.dr=dir*p*a.v*(.08+Math.random()*.14)*a.tw;a.imp=20+Math.random()*50;a.until=(o?150:300)+Math.random()*(o?330:900);a.mode=dir>0?"up":"down";
+    else{dir=p>(a.lo+a.hi)/2?1:-1;if(rngf()<.35)dir=-dir}
+    a.dr=dir*p*a.v*(.08+rngf()*.14)*a.tw;a.imp=20+rngf()*50;a.until=(o?150:300)+rngf()*(o?330:900);a.mode=dir>0?"up":"down";
   }else{
-    const hw=sd*(m==="sq"?1.5+Math.random()*1.5:(o?2.2:3)+Math.random()*(o?3.6:5)),mid=p+(Math.random()-.5)*hw*.8;
-    a.lo=mid-hw;a.hi=mid+hw;a.dr=0;a.until=m==="sq"?100+Math.random()*180:(o?240+Math.random()*480:600+Math.random()*1800);a.mode=m;
+    const hw=sd*(m==="sq"?1.5+rngf()*1.5:(o?2.2:3)+rngf()*(o?3.6:5)),mid=p+(rngf()-.5)*hw*.8;
+    a.lo=mid-hw;a.hi=mid+hw;a.dr=0;a.until=m==="sq"?100+rngf()*180:(o?240+rngf()*480:600+rngf()*1800);a.mode=m;
   }
   a.age=0}
 function minuteEnd(a,p){
+  rngf=a.rng||Math.random;
   if(a.mp!==undefined){const d=p-a.mp,sg=d>0?1:d<0?-1:0;
-    if(a.fd){if(sg===a.fd){a.pbT=50+Math.floor(Math.random()*10);a.pbD=-a.fd*p*a.v*.24;a.mp=p;return}a.fd=0}
-    if(sg&&sg===a.ss)a.sn++;else{a.sn=sg?1:0;a.ss=sg;if(sg)a.sl=3+Math.floor(Math.random()*5)}
-    if(a.ss&&a.sn>=a.sl){a.pbT=45+Math.floor(Math.random()*20);a.pbD=-a.ss*p*a.v*.18;a.fd=a.ss;a.sn=0;a.ss=0}}
+    if(a.fd){if(sg===a.fd){a.pbT=50+Math.floor(rngf()*10);a.pbD=-a.fd*p*a.v*.24;a.mp=p;return}a.fd=0}
+    if(sg&&sg===a.ss)a.sn++;else{a.sn=sg?1:0;a.ss=sg;if(sg)a.sl=3+Math.floor(rngf()*5)}
+    if(a.ss&&a.sn>=a.sl){a.pbT=45+Math.floor(rngf()*20);a.pbD=-a.ss*p*a.v*.18;a.fd=a.ss;a.sn=0;a.ss=0}}
   a.mp=p}
 function nextP(a,p,s,t){
   const u=p*a.v;
-  if(s<1)return p+u*a.vm*(a.otc?.6:.4)*rnd()*2;
+  if(s<1){rngf=Math.random;return p+u*a.vm*(a.otc?.6:.4)*rnd()*2}
+  rngf=a.rng||Math.random;
   if(t!==undefined&&t%60===0)minuteEnd(a,p);
   if(!a.mode||a.age>=a.until)newRegime(a,p);
   a.age+=1;
   a.vm+=(1-a.vm)*.01;
-  if(Math.random()<.002)a.vm=Math.min(2.5,a.vm*(1.4+Math.random()*.8));
-  if(Math.random()<.002)a.vm=Math.max(.6,a.vm*.6);
+  if(rngf()<.002)a.vm=Math.min(2.5,a.vm*(1.4+rngf()*.8));
+  if(rngf()<.002)a.vm=Math.max(.6,a.vm*.6);
   a.tr=a.tr*.97+rnd()*.1;
   let q=p+u*a.vm*(a.mode==="sq"?.5:1)*(a.pbT>0?.5:1)*rnd()*2;
   if(a.pbT>0){a.pbT-=1;q+=a.pbD}
   if(a.rev){q+=a.rev*.6;a.rev*=.35;if(Math.abs(a.rev)<u*.2)a.rev=0}
-  else if(Math.random()<a.sw){const z=(Math.random()<.5?-1:1)*u*a.vm*(2.5+Math.random()*4.5);q+=z;a.rev=-z*.85}
+  else if(rngf()<a.sw){const z=(rngf()<.5?-1:1)*u*a.vm*(2.5+rngf()*4.5);q+=z;a.rev=-z*.85}
   q-=a.ld*a.ar;
   if(a.mode==="up"||a.mode==="down"){q+=(a.pbT>0?0:a.dr*(a.imp>0?2.5:1))+u*a.tr*.6*a.tw;a.imp-=1}
   else{
     const hi=a.hi,lo=a.lo;q+=((hi+lo)/2-q)*.0015+u*a.tr*.5*a.tw;
     if(a.pc>0){a.pc-=1;if(q>hi)q-=(q-hi)*.3;else if(q<lo)q+=(lo-q)*.3}
-    else if(q>hi){if(Math.random()<a.wp)a.pc=10;else q=hi-(q-hi)*.7}
-    else if(q<lo){if(Math.random()<a.wp)a.pc=10;else q=lo+(lo-q)*.7}}
+    else if(q>hi){if(rngf()<a.wp)a.pc=10;else q=hi-(q-hi)*.7}
+    else if(q<lo){if(rngf()<a.wp)a.pc=10;else q=lo+(lo-q)*.7}}
   a.ld=q-p;return q}
-let ver=0;function applyGap(a,p){const j=(Math.random()<.5?-1:1)*p*a.v*7.7*(.6+Math.random()*1.0);if(a.mode==="range"||a.mode==="sq"){a.lo+=j;a.hi+=j}return p+j}
+let ver=0;function applyGap(a,p){rngf=a.rng||Math.random;const j=(rngf()<.5?-1:1)*p*a.v*7.7*(.6+rngf()*1.0);if(a.mode==="range"||a.mode==="sq"){a.lo+=j;a.hi+=j}return p+j}
 const ticks={},HN=10800;
 function ensure(k){if(ticks[k])return;const a=assets[k],now=Math.floor(Date.now()/1000);let p=a.p;const arr=[];
-  for(let i=HN;i>=0;i--){p=nextP(a,p,1,now-i);if((now-i)%60===0&&Math.random()<a.gp)p=applyGap(a,p);arr.push({t:now-i,p})}ticks[k]=arr}
+  for(let i=HN;i>=0;i--){p=nextP(a,p,1,now-i);if((now-i)%60===0&&rngf()<a.gp)p=applyGap(a,p);arr.push({t:now-i,p})}ticks[k]=arr}
 function backfill(k){const arr=ticks[k],a=assets[k],n=14400,t0=arr[0].t,tmp=Object.assign({},a,{mode:"",age:0,until:0,tr:0,vm:1,ld:0,rev:0,pc:0,imp:0});let p=arr[0].p;const ch=[];
-  for(let i=0;i<n;i++){p=nextP(tmp,p,1,t0-n+i);if((t0-n+i)%60===0&&Math.random()<a.gp)p=applyGap(tmp,p);ch.push({t:t0-n+i,p})}
+  for(let i=0;i<n;i++){p=nextP(tmp,p,1,t0-n+i);if((t0-n+i)%60===0&&rngf()<a.gp)p=applyGap(tmp,p);ch.push({t:t0-n+i,p})}
   const sh=arr[0].p-ch[n-1].p;ch.forEach(x=>{x.p+=sh});ticks[k]=ch.concat(arr);ver++}
 function advance(){const now=Math.floor(Date.now()/1000);
   for(const k in ticks){const a=assets[k],arr=ticks[k];let last=arr[arr.length-1],pushed=false;
     if(now-last.t>7200)last={t:now-7200,p:last.p};
-    while(last.t<now){const t1=last.t+1;let np=nextP(a,last.p,1,t1);if(t1%60===0&&Math.random()<a.gp)np=applyGap(a,np);last={t:t1,p:np};arr.push(last);pushed=true}
+    while(last.t<now){const t1=last.t+1;let np=nextP(a,last.p,1,t1);if(t1%60===0&&rngf()<a.gp)np=applyGap(a,np);last={t:t1,p:np};arr.push(last);pushed=true}
     if(!pushed)last.p=nextP(a,last.p,.5);
-    if(arr.length>43200)arr.splice(0,arr.length-43200)}ver++}
+    if(arr.length>100000)arr.splice(0,arr.length-100000)}ver++}
 function candlesFor(k){ensure(k);const out=[],a=assets[k];let b=-1,c=null;
   for(const x of ticks[k]){const bk=Math.floor(x.t/tf);
     if(bk!==b){b=bk;const o=(c&&Math.abs(x.p-c.c)<x.p*a.v*4)?c.c:x.p;c={t:bk*tf,o,h:Math.max(o,x.p),l:Math.min(o,x.p),c:x.p};out.push(c)}
@@ -223,5 +227,5 @@ const IND={
  aro:["Aroon","p",r=>{const H=HI(r),L=LO(r),u=[],d=[];for(let i=0;i<r.length;i++){if(i<14){u.push(null);d.push(null);continue}let hi=-Infinity,lo=Infinity,hk=0,lk=0;for(let j=i-14;j<=i;j++){if(H[j]>=hi){hi=H[j];hk=i-j}if(L[j]<=lo){lo=L[j];lk=i-j}}u.push(100*(14-hk)/14);d.push(100*(14-lk)/14)}return{lines:[{a:u,c:"#2fbf71"},{a:d,c:"#e5533d"}],fixed:[0,100],lv:[50]}}]
 };
 
-return{list,assets,ticks,ensure,advance,backfill,candlesFor,price,levels,scan,PN,IND,rsi,ema,sma,atr,setTf:function(v){tf=v},getVer:function(){return ver}}
+return{list,assets,ticks,candlesFor,price,levels,scan,PN,IND,rsi,ema,sma,atr,nextP,applyGap,setTf:function(v){tf=v}}
 })();
