@@ -125,49 +125,58 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .seg2{display:flex;gap:6px;flex-wrap:wrap}.seg2 button{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px}.seg2 button.on{border-color:var(--brass);color:var(--brass)}
 #hdb{padding:10px 16px 16px;max-height:70vh;overflow:auto;font-size:14px}.hs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.hs div{background:var(--panel2);border-radius:10px;padding:8px 10px}.hs small{display:block;color:var(--mute);font-size:11px}.hs b{font-size:16px}
 #hdb table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}#hdb th{color:var(--mute);font-weight:600;font-size:12px;text-align:left;padding:6px 4px}#hdb td{border-top:1px solid var(--line);padding:7px 4px}
+.bell,.fab,.psortw,.trx{display:none}.chev{display:none}.pp{display:contents}.ph{cursor:pointer}
+.prow2 .pp .r{color:var(--brass);font-weight:700}.chk{font-style:normal;background:var(--panel2);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:var(--brass)}
+.arow{display:flex;justify-content:space-between;align-items:center;padding:10px 4px;border-top:1px solid var(--line)}.arow button{background:none;border:0;font-size:22px;color:var(--mute)}
+.arow2{display:flex;gap:8px;margin:6px 0 12px}.arow2 input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px;font:inherit;font-size:16px}.arow2 .go{padding:0 18px}
+.psortw select{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit}
 @media(max-width:900px){
- html,body{height:auto;overscroll-behavior:none}
- .app{height:auto;min-height:100vh;grid-template-columns:minmax(0,1fr);grid-template-rows:52px auto minmax(340px,54vh) auto;grid-template-areas:"head" "tabs" "chart" "panel";padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
- .head{padding:0 12px}.logo{font-size:17px}.logo svg{width:26px;height:26px}.logo small{display:none}
- .accb{padding:4px 10px}.accb b{font-size:15px}.accm{right:-4px;width:min(260px,92vw)}
- .side{position:fixed;left:0;right:0;bottom:0;z-index:30;flex-direction:row;justify-content:space-around;align-items:center;padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));border-right:0;border-top:1px solid var(--line);gap:0}
- .sb{width:auto;flex:1;padding:6px 0 4px}.sp,#sbFs{display:none}
- .tabsrow{padding:0 8px}.tab{min-width:118px;padding:5px 8px}.addp{width:38px}
- .vs{width:34px;padding-bottom:36px}
- .panel{border-left:0;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
- .panel>.ph,.panel>.row,.panel>#msg,.panel>.trades{grid-column:1/-1}
- .buy,.sell{height:58px;font-size:18px}
- .trades{min-height:0}#rows{max-height:none}
- .sheet{left:8px;right:8px;width:auto;top:8px;bottom:34px}
- .menu{left:52px;max-width:calc(100% - 64px)}
- .toast{right:10px;top:40px}
- dialog{max-height:90vh;overflow:auto}
- #psearch,#nb,.stp input{font-size:16px}
- .phd,.prow2{grid-template-columns:1fr 58px 62px 46px;font-size:13px}
+ html,body{height:100%;overscroll-behavior:none}
+ .app{height:100vh;height:100dvh;min-height:540px;grid-template-columns:minmax(0,1fr);grid-template-rows:54px minmax(0,1fr) auto;grid-template-areas:"head" "chart" "panel";padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}
+ .tabsrow,.vs,.sp,#sbFs{display:none}
+ .head{padding:0 10px;gap:8px;justify-content:flex-start}
+ .acc{order:1}.bell{order:2;display:flex}.logo{order:3;margin-left:auto;font-size:16px}.logo small{display:none}.logo svg{width:24px;height:24px}
+ .accb{padding:4px 10px}.accb b{font-size:15px}.accm{left:0;right:auto;width:min(290px,92vw)}
+ .bell{position:relative;align-items:center;justify-content:center;width:46px;height:42px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--text)}
+ .bell svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+ .bell i,.fab i{position:absolute;top:-6px;right:-6px;background:var(--down);color:#fff;font-style:normal;font-size:11px;font-weight:800;border-radius:99px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+ .fab i{background:var(--brass);color:#10151c}.bell i[hidden],.fab i[hidden]{display:none}
+ .side{position:fixed;left:0;right:0;bottom:0;z-index:30;flex-direction:row;justify-content:space-around;align-items:center;padding:3px 4px calc(3px + env(safe-area-inset-bottom,0px));border-right:0;border-top:1px solid var(--line);gap:0}
+ .sb{width:auto;flex:1;padding:6px 0 4px}
+ .chart{min-height:0}
+ .tl{left:64px;top:8px;max-width:calc(100% - 150px)}.pi{display:none}#sig{font-size:11px}
+ .fab{position:absolute;left:8px;top:8px;display:flex;flex-direction:column;gap:8px;z-index:8}
+ .fab button{position:relative;width:46px;height:46px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--text)}
+ .fab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+ .cw.tools #fabMenu{background:var(--brass);color:#10151c}.cw.tools #fabTr{visibility:hidden}
+ .lt{display:none;left:8px;top:62px;bottom:auto;z-index:9}.cw.tools .lt{display:flex}.lt button{width:46px;height:46px}
+ .menu{left:64px;top:62px;bottom:auto;max-width:calc(100% - 76px)}.menu button{padding:12px 8px;font-size:15px}
+ #mTf:not([hidden]){display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:calc(100% - 76px)}
+ .sheet{left:8px;right:8px;width:auto;top:62px;bottom:8px}
+ .zm{bottom:12px}.ohlc{left:64px;bottom:50px}
+ .panel{grid-template-columns:1fr 1fr;grid-template-areas:"ph ph" "time inv" "pay pay" "buy sell" "msg msg";gap:12px 10px;padding:10px 12px 8px;border-left:0;border-top:1px solid var(--line);display:grid;align-content:start;overflow:visible}
+ .ph{grid-area:ph;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px}.chev{display:inline;margin-left:8px;color:var(--mute)}
+ .panel>.fld:nth-child(2){grid-area:time}.panel>.fld:nth-child(3){grid-area:inv}
+ .fld{position:relative;margin-top:4px}.fld label{position:absolute;top:-8px;left:10px;background:var(--panel);padding:0 5px;font-size:11px;z-index:1;margin:0}
+ .stp{height:46px}.stp b,.stp input{font-size:18px}
+ .lnk{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);background:var(--panel);padding:0 6px;margin:0;font-size:10px;white-space:nowrap}
+ .row{grid-area:pay}.buy{grid-area:buy}.sell{grid-area:sell}.buy,.sell{height:52px;font-size:17px}
+ #msg{grid-area:msg;font-size:12px;min-height:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .trades{display:none;margin:0}
+ body.showtr .trades{display:flex;position:fixed;left:0;right:0;bottom:calc(58px + env(safe-area-inset-bottom,0px));max-height:56vh;z-index:45;background:var(--panel);border-top:1px solid var(--line);padding:10px 14px;box-shadow:0 -10px 30px rgba(0,0,0,.5)}
+ .trades h2{display:flex;align-items:center;gap:8px}.trx{display:inline-block;margin-left:auto;background:none;border:0;font-size:26px;line-height:1;color:var(--mute)}
+ #rows{max-height:none}.toast{right:10px;top:64px}
+ dialog{max-height:92vh;overflow:auto}
+ #pdlg[open]{display:flex;flex-direction:column;width:100%;max-width:none;height:100%;max-height:none;margin:0;border-radius:0;border:0}
+ #plist{flex:1;max-height:none}.phd{display:none}.psortw{display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:14px;color:var(--mute)}
+ .prow2{grid-template-columns:1fr auto;grid-template-areas:"nm chgp" "pp chgp";row-gap:2px;padding:10px 6px 10px 0}
+ .prow2 .nm{grid-area:nm}.prow2 .chgp{grid-area:chgp;border-radius:99px;padding:4px 10px;background:var(--panel2);font-weight:700}
+ .prow2 .pp{display:flex;grid-area:pp;gap:14px;padding-left:76px;font-size:12px;color:var(--mute);font-weight:600}.prow2 .pp .r::before{content:attr(data-l) " ";color:var(--mute);font-weight:600}
+ #psearch,#nb,.stp input,#psort,.arow2 input{font-size:16px}
  .hs{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:900px) and (orientation:landscape){.app{grid-template-rows:52px auto 82vh auto}}
+@media(max-width:900px) and (max-height:620px){.app{min-height:500px}.stp{height:42px}.buy,.sell{height:46px}}
 @media(prefers-reduced-motion:reduce){.vbar i{transition:none}}
-
-.auth{position:fixed;inset:0;z-index:100;background:#fff;color:#1c2430;display:flex;flex-direction:column;align-items:center;padding:calc(28px + env(safe-area-inset-top,0px)) 22px 22px;overflow:auto}
-.auth[hidden],.auth [hidden]{display:none!important}
-.auth .lg{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;margin:8px 0 22px}
-.auth .lg svg{width:34px;height:34px}.auth .lg em{font-style:normal;color:#b9852a}
-.auth .seg{display:flex;background:#eef1f4;border-radius:10px;padding:3px;width:100%;max-width:360px;margin-bottom:18px}
-.auth .seg button{flex:1;border:0;background:none;padding:10px;border-radius:8px;font-weight:700;color:#5b6775}
-.auth .seg button.on{background:#1c2430;color:#fff}
-.auth form{width:100%;max-width:360px;display:flex;flex-direction:column;gap:12px}
-.auth label.f{display:block;border:1px solid #cfd6de;border-radius:10px;padding:6px 12px}
-.auth label.f span{display:block;font-size:11px;color:#7a8794}
-.auth input[type=email],.auth input[type=password],.auth select{width:100%;border:0;outline:0;font:inherit;font-size:16px;padding:4px 0;background:none;color:#1c2430}
-.auth .chk{display:flex;gap:8px;font-size:13px;color:#5b6775;align-items:flex-start}
-.auth .go2{border:0;border-radius:10px;padding:14px;font-weight:800;font-size:16px;color:#fff;background:#d9a441;margin-top:6px}
-.auth .err{color:#d33;font-size:13px;min-height:16px}
-.auth .note{font-size:12px;color:#7a8794;text-align:center;margin-top:6px}
-.mlist{display:flex;flex-direction:column;padding:6px 12px 14px}
-.mlist button{display:flex;justify-content:space-between;align-items:center;background:none;border:0;border-bottom:1px solid var(--line);padding:15px 4px;text-align:left;font-size:15px;font-weight:600}
-.mlist button:last-child{border-bottom:0}.mlist .out{color:var(--down)}
-.mhelp{padding:4px 16px 16px;font-size:14px;line-height:1.55;color:var(--mute)}.mhelp b{color:var(--text)}
 </style>
 </head>
 <body>
@@ -192,13 +201,15 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
         <button class="ghost" id="reset">Reset balance and trades</button>
         <p class="hint">Demo only. There is no deposit or withdrawal.</p>
       </div></div>
+  <button class="bell" id="bell" aria-label="Price alerts"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 1112 0v6l1.5 2h-15z"/><path d="M10 21a2 2 0 004 0"/></svg><i id="bellc" hidden>0</i></button>
   </header>
   <div class="tabsrow"><div id="tabs"></div><button class="addp" id="addp" aria-label="Add pair">+</button></div>
   <main class="chart">
     <div class="vs"><b id="vsT">50%</b><div class="vbar"><i id="vsR" style="height:50%"></i><i id="vsG" style="height:50%"></i></div><b id="vsB">50%</b></div>
-    <div class="cw">
+    <div class="cw" id="cw">
       <canvas id="c" aria-label="Simulated price chart"></canvas>
       <div class="toast" id="toast" hidden></div>
+      <div class="fab"><button id="fabMenu" aria-label="Chart tools">&#8943;</button><button id="fabTr" aria-label="Trades"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg><i id="fabc" hidden>0</i></button></div>
       <div class="tl"><span id="clk"></span><button class="pi" id="pinfo">PAIR INFORMATION</button><span id="sig"></span></div>
       <div class="lt">
         <button id="bDraw" data-m="shDraw" aria-label="Drawing tools">&#9998;</button>
@@ -215,14 +226,14 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
     </div>
   </main>
   <aside class="panel">
-    <div class="ph"><span id="pflags"></span><span id="pname"></span><span class="pc" id="ppay"></span></div>
+    <div class="ph"><span id="pflags"></span><span id="pname"></span><span class="pc" id="ppay"></span><span class="chev">&#9662;</span></div>
     <div class="fld"><label>Time</label><div class="stp"><button id="tm" aria-label="Shorter time">&minus;</button><b id="tv">01:00</b><button id="tp" aria-label="Longer time">+</button></div><button class="lnk" id="tsw">SWITCH TIME</button></div>
     <div class="fld"><label for="amt" id="alab">Investment (demo $)</label><div class="stp"><button id="im" aria-label="Decrease">&minus;</button><input id="amt" type="number" min="1" value="300"><button id="ip" aria-label="Increase">+</button></div><button class="lnk" id="isw">SWITCH</button></div>
     <div class="row"><span>Payout</span><b id="pout">$0.00</b></div>
     <button class="buy" id="up"><span>Buy</span><span>&#8593;</span></button>
     <button class="sell" id="dn"><span>Sell</span><span>&#8595;</span></button>
     <div id="msg">Pick a time and an investment, then Buy or Sell.</div>
-    <div class="trades"><h2>Trades <i id="tcount">0</i></h2><div id="rows"></div></div>
+    <div class="trades"><h2>Trades <i id="tcount">0</i><button class="trx" id="trclose" aria-label="Close">&times;</button></h2><div id="rows"></div></div>
   </aside>
 </div>
 <dialog id="dlg"><div class="dh"><b id="dt">Info</b><button id="dx" aria-label="Close">&times;</button></div><div id="db"></div></dialog>
@@ -230,7 +241,9 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
   <div class="ptb"><div class="ptabs" id="ptabs"><button data-c="cur" class="on">Currencies</button><button data-c="crypto">Crypto</button><button data-c="comm">Commodities</button></div></div>
   <div class="psr"><button id="pfav" class="starb" aria-label="Favorites">&#9733; <i id="pfc">0</i></button><input id="psearch" type="search" placeholder="Search" aria-label="Search pairs"></div>
   <div class="phd"><button data-s="n">Name</button><button data-s="chg">Changing</button><button data-s="pay">Profit 1+ min</button><button data-s="pay5">5+ min</button></div>
+  <div class="psortw">Sort by: <select id="psort"><option value="n">Name</option><option value="chg">Changing</option><option value="pay" selected>Profit 1+ min</option><option value="pay5">Profit 5+ min</option></select></div>
   <div id="plist"></div></dialog>
+<dialog id="adlg"><div class="dh"><b>Price alerts</b><button id="adx" aria-label="Close">&times;</button></div><div style="padding:14px 18px 18px"><div class="hint">Alert when price reaches</div><div class="arow2"><input id="apr" type="number" step="any"><button class="go" id="aadd">Add</button></div><div id="alist"></div></div></dialog>
 <dialog id="sdlg"><div class="dh"><b>Settings</b><button id="sdx" aria-label="Close">&times;</button></div><div id="sdb">
   <label class="ck"><input type="checkbox" id="sGrid"> Show grid</label>
   <label class="ck"><input type="checkbox" id="sCross"> Crosshair</label>
@@ -465,14 +478,14 @@ const IND={
  aro:["Aroon","p",r=>{const H=HI(r),L=LO(r),u=[],d=[];for(let i=0;i<r.length;i++){if(i<14){u.push(null);d.push(null);continue}let hi=-Infinity,lo=Infinity,hk=0,lk=0;for(let j=i-14;j<=i;j++){if(H[j]>=hi){hi=H[j];hk=i-j}if(L[j]<=lo){lo=L[j];lk=i-j}}u.push(100*(14-hk)/14);d.push(100*(14-lk)/14)}return{lines:[{a:u,c:"#2fbf71"},{a:d,c:"#e5533d"}],fixed:[0,100],lv:[50]}}]
 };
 
-let bal=10000,trades=[],zoom=70,off=0,anc=0,dragging=false;
+let bal=10000,trades=[],zoom=(window.matchMedia&&matchMedia("(max-width:900px)").matches)?45:70,off=0,anc=0,dragging=false;
 let exp=60,timeMode="timer",clockT=0,amt=300,amtMode="amt",pct=10;
 const $=id=>document.getElementById(id);
 let API=null,SRV=false,es=null,esKey="",busy={},noMore={},pm={};
 try{API=localStorage.getItem("hb-api")}catch(e){}
 if(API===null||API==="")API=(location.protocol.indexOf("http")===0&&!/claude\.ai|claudeusercontent|anthropic/.test(location.host))?"":null;
 if(API)API=API.replace(/\/+$/,"");
-const EXPS=[5,10,15,30,60,120,180,300],AMTS=[1,2,5,10,20,50,100,200,300,500,1000],PCTS=[1,2,5,10,20,25,50,75,100],TFS=[5,10,15,30,60,120,180,300,600,900,1800];
+const EXPS=[5,10,15,30,60,120,180,300],AMTS=[1,2,5,10,20,50,100,200,300,500,1000],PCTS=[1,2,5,10,20,25,50,75,100],TFS=[5,10,15,30,60,120,180,300,600,900,1800,3600],tfl=s=>s>=3600?s/3600+"h":s<60?s+"s":s/60+"m";
 let tabs=["AUD/USD","EUR/GBP","USD/JPY","EUR/USD","GBP/USD","USD/MXN (OTC)","USD/EGP (OTC)","USD/IDR (OTC)","NZD/CAD (OTC)","Bitcoin (OTC)"];
 const S={grid:true,cross:true,ohlc:true,vib:true,col:"classic"},COLS={classic:["#2fbf71","#e5533d"],blue:["#3b82f6","#f59e0b"],mono:["#e9e4d4","#6b7785"]};
 let favs=[];
@@ -687,7 +700,7 @@ function updPanel(){const a=assets[cur],en=expNow();$("pflags").innerHTML=flags(
 /* ---- trades ---- */
 let lastRows="";
 function renderRows(){const now=Date.now(),op=trades.filter(t=>t.open),cl=trades.filter(t=>!t.open).slice(-30).reverse();
-  $("tcount").textContent=op.length;
+  $("tcount").textContent=op.length;$("fabc").textContent=op.length;$("fabc").hidden=!op.length;
   const row=t=>`<div class="trow"><div class="r1">${flags(t.asset)}<b>${t.asset}</b><span>${t.open?mmss((t.end-now)/1000):"closed"}</span></div><div class="r2"><span>${money(t.amt)} \u00b7 ${t.side=="up"?"Buy":"Sell"}</span><b class="${t.open?"":t.res>0?"win":t.res<0?"loss":""}">${t.open?"Open":(t.res>0?"+":"")+money(t.res)}</b></div></div>`;
   const html=op.length||cl.length?op.map(row).join("")+(cl.length?'<div class="sep">Closed</div>'+cl.map(row).join(""):""):'<div class="empty">No trades yet.</div>';
   if(html!==lastRows){lastRows=html;$("rows").innerHTML=html}}
@@ -716,7 +729,7 @@ function payTick(){if(SRV)return;const s=Math.floor(Date.now()/300000);if(s===pa
   renderTabs();updPanel();toast("Payouts updated")}
 /* ---- tabs + pairs ---- */
 function renderTabs(){$("tabs").innerHTML=tabs.map(n=>`<div class="tab${n===cur?" on":""}" data-n="${n}" role="button" tabindex="0">${flags(n)}<span><b>${n}</b><em>${Math.round(assets[n].pay*100)}%</em></span>${n===cur&&tabs.length>1?'<i class="x" data-x="1" title="Close">\u00d7</i>':""}</div>`).join("");const o=$("tabs").querySelector(".on");if(o)o.scrollIntoView({block:"nearest",inline:"nearest"})}
-function switchPair(n){if(!tabs.includes(n))tabs.push(n);cur=n;ensure(n);connect();off=0;anc=0;yfix=null;tmp=null;renderTabs();updPanel();showSent();draw()}
+function switchPair(n){if(!tabs.includes(n)){tabs.push(n);if(tabs.length>12){const i=tabs.findIndex(x=>x!==n&&x!==cur);if(i>=0)tabs.splice(i,1)}}cur=n;ensure(n);connect();off=0;anc=0;yfix=null;tmp=null;renderTabs();updPanel();showSent();updBell();draw()}
 $("tabs").onclick=e=>{const t=e.target.closest(".tab");if(!t)return;const n=t.dataset.n;
   if(e.target.dataset.x){const i=tabs.indexOf(n);tabs.splice(i,1);connect();switchPair(tabs[Math.max(0,i-1)])}else if(n!==cur)switchPair(n)};
 let pTab="cur",pSort="pay",pDir=-1,pFav=false;
@@ -726,16 +739,18 @@ function pairList(){const q=String($("psearch").value||"").toLowerCase();$("pfc"
   let f=list.filter(a=>a.n.toLowerCase().includes(q)&&(pFav?favs.includes(a.n):grp(a)===pTab));
   const key={n:a=>a.n,chg:a=>chg(a),pay:a=>a.pay,pay5:a=>a.pay5}[pSort];
   f.sort((a,b)=>{const x=key(a),y=key(b);return(x<y?-1:x>y?1:0)*pDir});
-  $("plist").innerHTML=f.map(a=>{const c=chg(a);return `<button class="prow2" data-n="${a.n}"><span class="nm"><i class="fav${favs.includes(a.n)?" on":""}" data-f="${a.n}">\u2605</i>${flags(a.n)}<b>${a.n}</b></span><span class="r ${c>=0?"win":"loss"}">${c>=0?"\u25b2":"\u25bc"} ${Math.abs(c).toFixed(2)}%</span><span class="r" style="color:var(--brass);font-weight:700">${Math.round(a.pay*100)}%</span><span class="r" style="color:var(--brass);font-weight:700">${Math.round(a.pay5*100)}%</span></button>`}).join("")||'<div class="empty" style="padding:14px 16px">No pair found.</div>'}
+  $("plist").innerHTML=f.map(a=>{const c=chg(a);return `<button class="prow2" data-n="${a.n}"><span class="nm"><i class="fav${favs.includes(a.n)?" on":""}" data-f="${a.n}">\u2605</i>${flags(a.n)}<b>${a.n}</b>${a.n===cur?'<em class="chk">\u2713</em>':""}</span><span class="r chgp ${c>=0?"win":"loss"}">${c>=0?"\u25b2":"\u25bc"} ${Math.abs(c).toFixed(2)}%</span><span class="pp"><span class="r p1" data-l="Profit 1+ min">${Math.round(a.pay*100)}%</span><span class="r p5" data-l="5+ min">${Math.round(a.pay5*100)}%</span></span></button>`}).join("")||'<div class="empty" style="padding:14px 16px">No pair found.</div>'}
 function openPairs(){if(!SRV)list.forEach(a=>ensure(a.n));pairList();$("pdlg").showModal();if(SRV)refreshMeta().then(pairList)}
 $("addp").onclick=openPairs;$("sbPairs").onclick=openPairs;
 $("psearch").oninput=pairList;
 $("ptabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;pTab=b.dataset.c;pFav=false;[...$("ptabs").children].forEach(x=>x.classList.toggle("on",x===b));pairList()};
+$("psort").onchange=e=>{pSort=e.target.value;pDir=pSort==="n"?1:-1;pairList()};
 $("pfav").onclick=()=>{pFav=!pFav;pairList()};
 document.querySelector(".phd").onclick=e=>{const b=e.target.closest("button");if(!b)return;const s=b.dataset.s;if(pSort===s)pDir=-pDir;else{pSort=s;pDir=s==="n"?1:-1}pairList()};
 $("plist").onclick=e=>{const f=e.target.closest("[data-f]");if(f){e.stopPropagation();const n=f.dataset.f,i=favs.indexOf(n);if(i<0)favs.push(n);else favs.splice(i,1);save();pairList();return}
   const b=e.target.closest(".prow2");if(!b)return;$("pdlg").close();switchPair(b.dataset.n)};
 $("pdx").onclick=()=>$("pdlg").close();
+document.querySelector(".ph").onclick=openPairs;
 /* ---- pair information ---- */
 function showInfo(){const a=assets[cur],arr=ticks[cur],pip=a.pip;let hi=-1e9,lo=1e9;arr.forEach(q=>{hi=Math.max(hi,q.p);lo=Math.min(lo,q.p)});
   const p=price(),chg=(p-arr[0].p)/arr[0].p*100,f=v=>v.toFixed(a.d);
@@ -772,7 +787,7 @@ $("nbc").onclick=()=>{const v=+$("nb").value;if(v>=1&&v<=1000000){bal=Math.round
 $("reset").onclick=()=>{bal=10000;trades=[];$("msg").textContent="Balance reset to $10,000.00.";render();$("accm").hidden=true};
 /* ---- sheets & menus ---- */
 function closeMenus(){document.querySelectorAll(".menu,.sheet").forEach(m=>m.hidden=true)}
-$("mTf").innerHTML=TFS.map(s=>`<button data-s="${s}">${s<60?s+"s":s/60+"m"}</button>`).join("");
+$("mTf").innerHTML=TFS.map(s=>`<button data-s="${s}">${tfl(s)}</button>`).join("");
 document.querySelectorAll("[data-m]").forEach(b=>b.onclick=e=>{e.stopPropagation();const m=$(b.dataset.m),was=!m.hidden;closeMenus();m.hidden=was});
 document.addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.id!=="up"&&b.id!=="dn"&&b.id!=="snd")sfx.click();if(!e.target.closest(".menu,.sheet"))closeMenus();if(!e.target.closest(".acc"))$("accm").hidden=true});
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeMenus());
@@ -808,7 +823,16 @@ cv.addEventListener("wheel",e=>{e.preventDefault();setZoom(zoom*(e.deltaY>0?1.12
 const ptrs=new Map();let pd=0,lx=0;
 function pos(e){const r=cv.getBoundingClientRect(),k=cv.width/r.width;return{x:(e.clientX-r.left)*k,y:(e.clientY-r.top)*k}}
 function toD(e){const q=pos(e);return{t:unX(q.x),p:unY(q.y)}}
-function toggleAlert(q){const L=AL(),yy=q.y;const i=L.findIndex(a=>Math.abs(Y(a.p)-yy)<10*V.dpr);if(i>=0){L.splice(i,1);toast("Alert removed")}else{const p=unY(yy),pr=price();L.push({p,side:pr>p?1:-1});toast("\u{1F514} Alert set at "+p.toFixed(assets[cur].d))}}
+function updBell(){const n=AL().length;$("bellc").textContent=n;$("bellc").hidden=!n}
+function renderAlerts(){const L=AL(),d=assets[cur].d;$("alist").innerHTML=L.length?L.map((a,i)=>`<div class="arow"><span>\u{1F514} ${a.p.toFixed(d)}</span><button data-i="${i}" aria-label="Remove alert">\u00d7</button></div>`).join(""):'<div class="empty">No alerts for '+cur+'.</div>'}
+function openAlerts(){$("apr").value=price().toFixed(assets[cur].d);renderAlerts();$("adlg").showModal()}
+$("bell").onclick=openAlerts;$("adx").onclick=()=>$("adlg").close();
+$("aadd").onclick=()=>{const p=+$("apr").value;if(!(p>0)){sfx.err();return}AL().push({p,side:price()>p?1:-1});renderAlerts();updBell();toast("\u{1F514} Alert set at "+p.toFixed(assets[cur].d))};
+$("alist").onclick=e=>{const b=e.target.closest("button");if(!b)return;AL().splice(+b.dataset.i,1);renderAlerts();updBell()};
+$("fabMenu").onclick=e=>{e.stopPropagation();const c=$("cw");c.classList.toggle("tools");if(!c.classList.contains("tools"))closeMenus();$("fabMenu").innerHTML=c.classList.contains("tools")?"&times;":"&#8943;"};
+$("fabTr").onclick=e=>{e.stopPropagation();document.body.classList.toggle("showtr")};
+$("trclose").onclick=()=>document.body.classList.remove("showtr");
+function toggleAlert(q){const L=AL(),yy=q.y;const i=L.findIndex(a=>Math.abs(Y(a.p)-yy)<10*V.dpr);if(i>=0){L.splice(i,1);toast("Alert removed")}else{const p=unY(yy),pr=price();L.push({p,side:pr>p?1:-1});toast("\u{1F514} Alert set at "+p.toFixed(assets[cur].d))}updBell()}
 function finish(){if(tmp&&tmp.pts.length){DR().push({type:tmp.type,pts:tmp.pts.slice(0,tmp.type==="pen"?tmp.pts.length:tmp.np)})}tmp=null;setTool("cursor");req()}
 cv.addEventListener("pointerdown",e=>{cv.setPointerCapture(e.pointerId);closeMenus();const q=pos(e);
   if(tool==="cursor"&&q.x>V.right&&q.y<V.ph){
@@ -850,57 +874,11 @@ $("sInst").onclick=()=>{if(dip){dip.prompt();dip=null;$("sInst").hidden=true}};
 renderTabs();updPanel();showSent();sndLabel();setTool("cursor");applySet();clock();render();draw();
 setInterval(()=>{if(!SRV)advance();settle()},250);
 const FR=(window.matchMedia&&matchMedia("(max-width:900px)").matches)?40:28;let lastF=0;function loop(ts){requestAnimationFrame(loop);if(ts-lastF<FR)return;const dt=Math.min(.25,Math.max(.001,(ts-lastF)/1000));lastF=ts;easeStep(dt);draw()}
-easeStep(.001);requestAnimationFrame(loop);setInterval(drift,2500);setInterval(renderRows,500);setInterval(()=>{clock();updPanel()},1000);setInterval(payTick,1000);
+easeStep(.001);requestAnimationFrame(loop);setInterval(drift,2500);setInterval(renderRows,500);setInterval(()=>{clock();updPanel();updBell()},1000);setInterval(payTick,1000);
 
 })();
 
 </script>
-
-<div class="auth" id="auth" hidden>
-  <div class="lg"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#d9a441" stroke-width="2"/><path d="M16 4v8M16 20v8M4 16h8M20 16h8" stroke="#d9a441" stroke-width="2"/></svg><span>HUNTER <em>BROKER</em></span></div>
-  <div class="seg"><button type="button" id="aLog">Login</button><button type="button" id="aReg" class="on">Registration</button></div>
-  <form id="aForm" novalidate>
-    <label class="f"><span>Email</span><input id="aEm" type="email" autocomplete="email" placeholder="Email"></label>
-    <label class="f"><span>Password</span><input id="aPw" type="password" autocomplete="current-password" placeholder="Password"></label>
-    <label class="f" id="aCurW"><span>Currency</span><select id="aCur"><option>USD</option></select></label>
-    <label class="chk" id="aAgW"><input type="checkbox" id="aAg"><span>I confirm that I am 18 years old or older. I understand this is a practice app with simulated prices and virtual money only.</span></label>
-    <div class="err" id="aErr"></div>
-    <button class="go2" id="aGo" type="submit">Register</button>
-    <div class="note">Your account is saved only on this device. No real money.</div>
-  </form>
-</div>
-<dialog id="mdlg"><div class="dh"><b id="mdt">More</b><button id="mdx" aria-label="Close">&times;</button></div><div id="mdb"></div></dialog>
 <script>if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
-<script>
-(function(){
-const $=id=>document.getElementById(id);
-const KU="hb-user",KI="hb-in";
-let mode="reg";
-const get=()=>{try{return JSON.parse(localStorage.getItem(KU)||"null")}catch(e){return null}};
-async function hash(s){try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("hb:"+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return btoa(unescape(encodeURIComponent("hb:"+s)))}}
-function setMode(m){mode=m;$("aReg").classList.toggle("on",m==="reg");$("aLog").classList.toggle("on",m==="log");$("aCurW").hidden=$("aAgW").hidden=m==="log";$("aGo").textContent=m==="reg"?"Register":"Login";$("aErr").textContent="";$("aPw").autocomplete=m==="reg"?"new-password":"current-password"}
-function acct(){const u=get();const ah=document.querySelector("#accm .ah");if(ah)ah.textContent="Demo account"+(u?" \u00b7 "+u.email:"")}
-function gate(){let on=false;try{on=localStorage.getItem(KI)==="1"&&!!get()}catch(e){}$("auth").hidden=on;if(!on)setMode(get()?"log":"reg");acct()}
-$("aReg").onclick=()=>setMode("reg");$("aLog").onclick=()=>setMode("log");
-$("aForm").addEventListener("submit",async e=>{e.preventDefault();const em=$("aEm").value.trim().toLowerCase(),pw=$("aPw").value,er=$("aErr");
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){er.textContent="Enter a valid email.";return}
-  if(pw.length<6){er.textContent="Password must be at least 6 characters.";return}
-  try{
-    if(mode==="reg"){if(!$("aAg").checked){er.textContent="Please confirm the 18+ box.";return}
-      localStorage.setItem(KU,JSON.stringify({email:em,h:await hash(pw),cur:$("aCur").value}))}
-    else{const u=get();if(!u||u.email!==em||u.h!==await hash(pw)){er.textContent="Wrong email or password.";return}}
-    localStorage.setItem(KI,"1");$("aPw").value="";gate()
-  }catch(x){er.textContent="Could not save on this device."}});
-function openM(t,b){$("mdt").textContent=t;$("mdb").innerHTML=b;$("mdlg").showModal()}
-function more(){openM("More",'<div class="mlist"><button data-a="hist">Trade history<span>&rsaquo;</span></button><button data-a="pairs">Select trade pair<span>&rsaquo;</span></button><button data-a="set">Settings<span>&rsaquo;</span></button><button data-a="help">Help<span>&rsaquo;</span></button><button data-a="out" class="out">Logout</button></div>')}
-$("mdb").addEventListener("click",e=>{const b=e.target.closest("button[data-a]");if(!b)return;const a=b.dataset.a;
-  if(a==="out"){try{localStorage.removeItem(KI)}catch(x){}$("mdlg").close();gate();return}
-  if(a==="help"){openM("Help",'<div class="mhelp"><p><b>FAQ.</b> Prices are generated by a simulator. They are not real market prices. Balance is virtual and can be reset from the account menu.</p><p><b>How to trade.</b> Pick a pair, set the time and investment, then press Buy (price goes up) or Sell (price goes down). The result comes when the timer ends.</p><p><b>Install.</b> Android Chrome: menu, Install app. iPhone Safari: Share, Add to Home Screen.</p></div>');return}
-  $("mdlg").close();const m={hist:"sbHist",pairs:"sbPairs",set:"sbSet"}[a];if(m&&$(m))$(m).click()});
-$("mdx").onclick=()=>$("mdlg").close();
-const sp=document.querySelector(".side .sp");if(sp){const b=document.createElement("button");b.className="sb";b.id="sbMore";b.innerHTML='<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>More';b.onclick=more;sp.parentNode.insertBefore(b,sp)}
-gate();
-})();
-</script>
 </body>
 </html>
