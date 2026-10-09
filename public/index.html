@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#10151c">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -74,7 +74,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor
 .fld label{display:block;font-size:12px;color:var(--mute);margin:0 0 4px 4px}
 .stp{display:flex;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:10px;height:48px}
 .stp button{width:44px;height:100%;background:none;border:0;font-size:22px;color:var(--mute)}
-.stp b,.stp input{flex:1;min-width:0;text-align:center;font-size:20px;font-weight:700;background:none;border:0;color:var(--text);font-family:inherit;font-variant-numeric:tabular-nums}
+.stp b,.stp input{flex:1 1 0;width:0;min-width:0;text-align:center;font-size:20px;font-weight:700;background:none;border:0;color:var(--text);font-family:inherit;font-variant-numeric:tabular-nums}
 .stp input::-webkit-inner-spin-button{display:none}
 .row{display:flex;justify-content:space-between;font-size:14px;color:var(--mute)}.row b{color:var(--text)}
 .buy,.sell{height:54px;border:0;border-radius:10px;font-weight:800;font-size:17px;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
@@ -125,14 +125,20 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .seg2{display:flex;gap:6px;flex-wrap:wrap}.seg2 button{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px}.seg2 button.on{border-color:var(--brass);color:var(--brass)}
 #hdb{padding:10px 16px 16px;max-height:70vh;overflow:auto;font-size:14px}.hs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.hs div{background:var(--panel2);border-radius:10px;padding:8px 10px}.hs small{display:block;color:var(--mute);font-size:11px}.hs b{font-size:16px}
 #hdb table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}#hdb th{color:var(--mute);font-weight:600;font-size:12px;text-align:left;padding:6px 4px}#hdb td{border-top:1px solid var(--line);padding:7px 4px}
-.bell,.fab,.psortw,.trx{display:none}.chev{display:none}.pp{display:contents}.ph{cursor:pointer}
+.bell,.fab,.psortw,.trx{display:none}
+#boot{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}#boot[hidden]{display:none}
+.bx{max-width:320px;display:flex;flex-direction:column;gap:12px;align-items:center}.bx p{margin:0;color:var(--mute);font-size:14px}.bx .go{padding:12px 18px}
+.spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--line);border-top-color:var(--brass);animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}.chev{display:none}.pp{display:contents}.ph{cursor:pointer}
 .prow2 .pp .r{color:var(--brass);font-weight:700}.chk{font-style:normal;background:var(--panel2);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:var(--brass)}
 .arow{display:flex;justify-content:space-between;align-items:center;padding:10px 4px;border-top:1px solid var(--line)}.arow button{background:none;border:0;font-size:22px;color:var(--mute)}
 .arow2{display:flex;gap:8px;margin:6px 0 12px}.arow2 input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px;font:inherit;font-size:16px}.arow2 .go{padding:0 18px}
 .psortw select{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit}
 @media(max-width:900px){
  html,body{height:100%;overscroll-behavior:none}
- .app{height:100vh;height:100dvh;min-height:540px;grid-template-columns:minmax(0,1fr);grid-template-rows:54px minmax(0,1fr) auto;grid-template-areas:"head" "chart" "panel";padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}
+ .app{position:fixed;left:0;top:0;right:0;bottom:0;height:auto;min-height:0;overflow:hidden;grid-template-columns:minmax(0,1fr);grid-template-rows:calc(54px + env(safe-area-inset-top,0px)) minmax(0,1fr) auto;grid-template-areas:"head" "chart" "panel";padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}
+ html,body{overflow:hidden;touch-action:pan-x pan-y}
+ .head{padding-top:env(safe-area-inset-top,0px)}
+ .panel>*,.fld{min-width:0}
  .tabsrow,.vs,.sp,#sbFs{display:none}
  .head{padding:0 10px;gap:8px;justify-content:flex-start}
  .acc{order:1}.bell{order:2;display:flex}.logo{order:3;margin-left:auto;font-size:16px}.logo small{display:none}.logo svg{width:24px;height:24px}
@@ -154,7 +160,7 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
  #mTf:not([hidden]){display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:calc(100% - 76px)}
  .sheet{left:8px;right:8px;width:auto;top:62px;bottom:8px}
  .zm{bottom:12px}.ohlc{left:64px;bottom:50px}
- .panel{grid-template-columns:1fr 1fr;grid-template-areas:"ph ph" "time inv" "pay pay" "buy sell" "msg msg";gap:12px 10px;padding:10px 12px 8px;border-left:0;border-top:1px solid var(--line);display:grid;align-content:start;overflow:visible}
+ .panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"ph ph" "time inv" "pay pay" "buy sell" "msg msg";gap:12px 10px;padding:10px 12px 8px;border-left:0;border-top:1px solid var(--line);display:grid;align-content:start;overflow:visible}
  .ph{grid-area:ph;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px}.chev{display:inline;margin-left:8px;color:var(--mute)}
  .panel>.fld:nth-child(2){grid-area:time}.panel>.fld:nth-child(3){grid-area:inv}
  .fld{position:relative;margin-top:4px}.fld label{position:absolute;top:-8px;left:10px;background:var(--panel);padding:0 5px;font-size:11px;z-index:1;margin:0}
@@ -175,11 +181,12 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
  #psearch,#nb,.stp input,#psort,.arow2 input{font-size:16px}
  .hs{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:900px) and (max-height:620px){.app{min-height:500px}.stp{height:42px}.buy,.sell{height:46px}}
+@media(max-width:900px) and (max-height:620px){.stp{height:42px}.buy,.sell{height:46px}}
 @media(prefers-reduced-motion:reduce){.vbar i{transition:none}}
 </style>
 </head>
 <body>
+<div id="boot" hidden><div class="bx"><div class="spin"></div><b id="bootT">Connecting to the market server...</b><p id="bootS">Loading prices.</p><button class="go" id="bootL" hidden>Use offline prices instead</button></div></div>
 <div class="app">
   <nav class="side" aria-label="Main">
     <button class="sb on" id="sbTrade"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 8-9"/><path d="M3 21h18"/></svg>Trade</button>
@@ -255,7 +262,8 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
   <p class="hint">Hint: click the price scale on the right of the chart to set a price alert. Click the bell tag to remove it.</p></div></dialog>
 <dialog id="hdlg"><div class="dh"><b>Trade history</b><button id="hdx" aria-label="Close">&times;</button></div><div id="hdb"></div></dialog>
 <script>
-const A=(n,full,cat,p,d,v,pay,otc)=>({n,full,cat,p,d,v,pay,otc:!!otc,wp:otc?.03:.015,gp:otc?.03:.015,pbT:0,pbD:0,fd:0,sn:0,ss:0,sl:5,mp:undefined,sw:otc?.015:.008,ar:otc?.15:.05,tw:otc?.75:1,ld:0,rev:0,pay5:Math.round(Math.max(.5,pay-.01+Math.random()*.04)*100)/100,pmin:otc?.80:cat==='Exotic'?.74:.76,pmax:otc?.95:cat==='Exotic'?.86:.90,pip:d>=5||d===4?1e-4:.01,tr:0,vm:1,s:50,mode:"",until:0,age:0,lo:0,hi:0,dr:0,imp:0,pc:0});
+let rngf=Math.random;
+const A=(n,full,cat,p,d,v,pay,otc)=>({n,full,cat,p,d,v,pay,otc:!!otc,wp:otc?.03:.015,gp:otc?.03:.015,pbT:0,pbD:0,fd:0,sn:0,ss:0,sl:5,mp:undefined,sw:otc?.015:.008,ar:otc?.15:.05,tw:otc?.75:1,ld:0,rev:0,pay5:Math.round(Math.max(.5,pay-.01+rngf()*.04)*100)/100,pmin:otc?.80:cat==='Exotic'?.74:.76,pmax:otc?.95:cat==='Exotic'?.86:.90,pip:d>=5||d===4?1e-4:.01,tr:0,vm:1,s:50,mode:"",until:0,age:0,lo:0,hi:0,dr:0,imp:0,pc:0});
 const R=(n,full,cat,p,d,v,pay)=>A(n,full,cat,p,d,v,pay,false);
 const O=(n,full,p,d,v,pay)=>A(n+" (OTC)",full+" OTC","OTC",p,d,v*1.8,pay,true);
 const list=[
@@ -309,10 +317,11 @@ const C=(n,full,cat,p,d,v,pay)=>A(n+" (OTC)",full+" OTC",cat,p,d,v,pay,true);
 list.push(C("Bitcoin","Bitcoin / US Dollar","Crypto",84500,2,2.5e-5,.72),C("Ethereum","Ethereum / US Dollar","Crypto",2400,2,3e-5,.78),C("Gold","Gold / US Dollar","Commodity",4100,2,1.4e-5,.80),C("Silver","Silver / US Dollar","Commodity",58,3,2.2e-5,.78),C("Brent Oil","Brent Crude Oil","Commodity",80,3,2e-5,.76));
 const assets={};list.forEach(a=>assets[a.n]=a);
 let cur="USD/IDR (OTC)",tf=60;
-function rnd(){return Math.random()+Math.random()+Math.random()-1.5}
+function rnd(){return rngf()+rngf()+rngf()-1.5}
 /* OTC-style regime engine: range -> squeeze -> breakout/trend -> range ... */
 function newRegime(a,p){
-  const sd=p*a.v*7.7,r=Math.random(),pm=a.mode,o=a.otc;let m;
+  rngf=a.rng||Math.random;
+  const sd=p*a.v*7.7,r=rngf(),pm=a.mode,o=a.otc;let m;
   if(!pm)m="range";
   else if(pm==="range")m=r<(o?.34:.5)?"trend":r<(o?.46:.65)?"sq":"range";
   else if(pm==="sq")m=r<.55?"trend":"range";
@@ -320,52 +329,54 @@ function newRegime(a,p){
   if(m==="trend"){
     let dir;
     if(pm==="up"||pm==="down")dir=a.dr>0?-1:1;
-    else{dir=p>(a.lo+a.hi)/2?1:-1;if(Math.random()<.35)dir=-dir}
-    a.dr=dir*p*a.v*(.08+Math.random()*.14)*a.tw;a.imp=20+Math.random()*50;a.until=(o?150:300)+Math.random()*(o?330:900);a.mode=dir>0?"up":"down";
+    else{dir=p>(a.lo+a.hi)/2?1:-1;if(rngf()<.35)dir=-dir}
+    a.dr=dir*p*a.v*(.08+rngf()*.14)*a.tw;a.imp=20+rngf()*50;a.until=(o?150:300)+rngf()*(o?330:900);a.mode=dir>0?"up":"down";
   }else{
-    const hw=sd*(m==="sq"?1.5+Math.random()*1.5:(o?2.2:3)+Math.random()*(o?3.6:5)),mid=p+(Math.random()-.5)*hw*.8;
-    a.lo=mid-hw;a.hi=mid+hw;a.dr=0;a.until=m==="sq"?100+Math.random()*180:(o?240+Math.random()*480:600+Math.random()*1800);a.mode=m;
+    const hw=sd*(m==="sq"?1.5+rngf()*1.5:(o?2.2:3)+rngf()*(o?3.6:5)),mid=p+(rngf()-.5)*hw*.8;
+    a.lo=mid-hw;a.hi=mid+hw;a.dr=0;a.until=m==="sq"?100+rngf()*180:(o?240+rngf()*480:600+rngf()*1800);a.mode=m;
   }
   a.age=0}
 function minuteEnd(a,p){
+  rngf=a.rng||Math.random;
   if(a.mp!==undefined){const d=p-a.mp,sg=d>0?1:d<0?-1:0;
-    if(a.fd){if(sg===a.fd){a.pbT=50+Math.floor(Math.random()*10);a.pbD=-a.fd*p*a.v*.24;a.mp=p;return}a.fd=0}
-    if(sg&&sg===a.ss)a.sn++;else{a.sn=sg?1:0;a.ss=sg;if(sg)a.sl=3+Math.floor(Math.random()*5)}
-    if(a.ss&&a.sn>=a.sl){a.pbT=45+Math.floor(Math.random()*20);a.pbD=-a.ss*p*a.v*.18;a.fd=a.ss;a.sn=0;a.ss=0}}
+    if(a.fd){if(sg===a.fd){a.pbT=50+Math.floor(rngf()*10);a.pbD=-a.fd*p*a.v*.24;a.mp=p;return}a.fd=0}
+    if(sg&&sg===a.ss)a.sn++;else{a.sn=sg?1:0;a.ss=sg;if(sg)a.sl=3+Math.floor(rngf()*5)}
+    if(a.ss&&a.sn>=a.sl){a.pbT=45+Math.floor(rngf()*20);a.pbD=-a.ss*p*a.v*.18;a.fd=a.ss;a.sn=0;a.ss=0}}
   a.mp=p}
 function nextP(a,p,s,t){
   const u=p*a.v;
-  if(s<1)return p+u*a.vm*(a.otc?.6:.4)*rnd()*2;
+  if(s<1){rngf=Math.random;return p+u*a.vm*(a.otc?.6:.4)*rnd()*2}
+  rngf=a.rng||Math.random;
   if(t!==undefined&&t%60===0)minuteEnd(a,p);
   if(!a.mode||a.age>=a.until)newRegime(a,p);
   a.age+=1;
   a.vm+=(1-a.vm)*.01;
-  if(Math.random()<.002)a.vm=Math.min(2.5,a.vm*(1.4+Math.random()*.8));
-  if(Math.random()<.002)a.vm=Math.max(.6,a.vm*.6);
+  if(rngf()<.002)a.vm=Math.min(2.5,a.vm*(1.4+rngf()*.8));
+  if(rngf()<.002)a.vm=Math.max(.6,a.vm*.6);
   a.tr=a.tr*.97+rnd()*.1;
   let q=p+u*a.vm*(a.mode==="sq"?.5:1)*(a.pbT>0?.5:1)*rnd()*2;
   if(a.pbT>0){a.pbT-=1;q+=a.pbD}
   if(a.rev){q+=a.rev*.6;a.rev*=.35;if(Math.abs(a.rev)<u*.2)a.rev=0}
-  else if(Math.random()<a.sw){const z=(Math.random()<.5?-1:1)*u*a.vm*(2.5+Math.random()*4.5);q+=z;a.rev=-z*.85}
+  else if(rngf()<a.sw){const z=(rngf()<.5?-1:1)*u*a.vm*(2.5+rngf()*4.5);q+=z;a.rev=-z*.85}
   q-=a.ld*a.ar;
   if(a.mode==="up"||a.mode==="down"){q+=(a.pbT>0?0:a.dr*(a.imp>0?2.5:1))+u*a.tr*.6*a.tw;a.imp-=1}
   else{
     const hi=a.hi,lo=a.lo;q+=((hi+lo)/2-q)*.0015+u*a.tr*.5*a.tw;
     if(a.pc>0){a.pc-=1;if(q>hi)q-=(q-hi)*.3;else if(q<lo)q+=(lo-q)*.3}
-    else if(q>hi){if(Math.random()<a.wp)a.pc=10;else q=hi-(q-hi)*.7}
-    else if(q<lo){if(Math.random()<a.wp)a.pc=10;else q=lo+(lo-q)*.7}}
+    else if(q>hi){if(rngf()<a.wp)a.pc=10;else q=hi-(q-hi)*.7}
+    else if(q<lo){if(rngf()<a.wp)a.pc=10;else q=lo+(lo-q)*.7}}
   a.ld=q-p;return q}
-let ver=0;function applyGap(a,p){const j=(Math.random()<.5?-1:1)*p*a.v*7.7*(.6+Math.random()*1.0);if(a.mode==="range"||a.mode==="sq"){a.lo+=j;a.hi+=j}return p+j}
+let ver=0;function applyGap(a,p){rngf=a.rng||Math.random;const j=(rngf()<.5?-1:1)*p*a.v*7.7*(.6+rngf()*1.0);if(a.mode==="range"||a.mode==="sq"){a.lo+=j;a.hi+=j}return p+j}
 const ticks={},HN=10800;
 function ensure(k){if(ticks[k])return;const a=assets[k],now=Math.floor(Date.now()/1000);let p=a.p;const arr=[];
-  for(let i=HN;i>=0;i--){p=nextP(a,p,1,now-i);if((now-i)%60===0&&Math.random()<a.gp)p=applyGap(a,p);arr.push({t:now-i,p})}ticks[k]=arr}
+  for(let i=HN;i>=0;i--){p=nextP(a,p,1,now-i);if((now-i)%60===0&&rngf()<a.gp)p=applyGap(a,p);arr.push({t:now-i,p})}ticks[k]=arr}
 function backfill(k){const arr=ticks[k],a=assets[k],n=14400,t0=arr[0].t,tmp=Object.assign({},a,{mode:"",age:0,until:0,tr:0,vm:1,ld:0,rev:0,pc:0,imp:0});let p=arr[0].p;const ch=[];
-  for(let i=0;i<n;i++){p=nextP(tmp,p,1,t0-n+i);if((t0-n+i)%60===0&&Math.random()<a.gp)p=applyGap(tmp,p);ch.push({t:t0-n+i,p})}
+  for(let i=0;i<n;i++){p=nextP(tmp,p,1,t0-n+i);if((t0-n+i)%60===0&&rngf()<a.gp)p=applyGap(tmp,p);ch.push({t:t0-n+i,p})}
   const sh=arr[0].p-ch[n-1].p;ch.forEach(x=>{x.p+=sh});ticks[k]=ch.concat(arr);ver++}
 function advance(){const now=Math.floor(Date.now()/1000);
   for(const k in ticks){const a=assets[k],arr=ticks[k];let last=arr[arr.length-1],pushed=false;
     if(now-last.t>7200)last={t:now-7200,p:last.p};
-    while(last.t<now){const t1=last.t+1;let np=nextP(a,last.p,1,t1);if(t1%60===0&&Math.random()<a.gp)np=applyGap(a,np);last={t:t1,p:np};arr.push(last);pushed=true}
+    while(last.t<now){const t1=last.t+1;let np=nextP(a,last.p,1,t1);if(t1%60===0&&rngf()<a.gp)np=applyGap(a,np);last={t:t1,p:np};arr.push(last);pushed=true}
     if(!pushed)last.p=nextP(a,last.p,.5);
     if(arr.length>100000)arr.splice(0,arr.length-100000)}ver++}
 function candlesFor(k){ensure(k);const out=[],a=assets[k];let b=-1,c=null;
@@ -708,17 +719,37 @@ function render(){$("bal").textContent=money(bal);$("bal2").textContent=money(ba
 function place(side){const v=amountVal(),en=expNow();
   if(!(v>=1)){$("msg").textContent="Enter an investment of at least $1.";sfx.err();return}
   if(v>bal){$("msg").textContent="Not enough demo balance. Lower the amount or reset the balance.";sfx.err();return}
-  bal-=v;trades.push({asset:cur,side,amt:v,pay:rate(assets[cur],en),entry:price(),et:Math.floor(Date.now()/1000),end:Date.now()+en*1000,open:true});sfx.open();vib(25);$("msg").textContent=(side=="up"?"Buy":"Sell")+" trade opened on "+cur+" for "+mmss(en)+".";render()}
+  bal-=v;trades.push({asset:cur,side,amt:v,pay:rate(assets[cur],en),entry:price(),et:Math.floor(Date.now()/1000),end:Date.now()+en*1000,open:true});sfx.open();vib(25);$("msg").textContent=(side=="up"?"Buy":"Sell")+" trade opened on "+cur+" for "+mmss(en)+".";render();persist()}
+async function priceAt(k,sec){const arr=ticks[k];
+  if(arr&&arr.length&&arr[0].t<=sec&&arr[arr.length-1].t>=sec){let lo=0,hi=arr.length-1;while(lo<hi){const m=(lo+hi+1)>>1;if(arr[m].t<=sec)lo=m;else hi=m-1}if(arr[lo].t===sec)return arr[lo].p}
+  if(SRV){try{const r=await fetch(API+"/api/ticks?pair="+encodeURIComponent(k)+"&seconds=60&before="+(sec+1),{cache:"no-store"}),j=await r.json();if(j.p&&j.p.length&&j.t0+j.p.length-1>=sec-2)return j.p[j.p.length-1]}catch(e){}}
+  return null}
+function finishTrade(t,px,quiet){t.close=px==null?t.entry:px;t.open=false;t.ct=Date.now();
+  const win=px!=null&&(t.side=="up"?px>t.entry:px<t.entry),tie=px==null||px===t.entry;
+  if(win){t.res=t.amt*t.pay;bal+=t.amt+t.res;if(!quiet){sfx.win();vib([30,50,30])}}else if(tie){t.res=0;bal+=t.amt;if(!quiet)sfx.tie()}else{t.res=-t.amt;if(!quiet){sfx.loss();vib(70)}}
+  const m=win?'<span class="win">Won '+money(t.res)+" on "+t.asset+'</span>':tie?(px==null?"Returned "+money(t.amt)+" (price not available)":"Returned "+money(t.amt)):'<span class="loss">Lost '+money(t.amt)+" on "+t.asset+'</span>';
+  $("msg").innerHTML=m}
 function settle(){const now=Date.now();let ch=false;
-  trades.forEach(t=>{if(!t.open)return;
+  trades.forEach(t=>{if(!t.open||t.chk)return;
     const rem=Math.ceil((t.end-now)/1000);if(rem>=1&&rem<=3&&t.b!==rem){t.b=rem;sfx.beep()}
-    if(now>=t.end){const px=price(t.asset);t.close=px;t.open=false;t.ct=now;ch=true;
-      const win=t.side=="up"?px>t.entry:px<t.entry,tie=px===t.entry;
-      if(win){t.res=t.amt*t.pay;bal+=t.amt+t.res;sfx.win();vib([30,50,30])}else if(tie){t.res=0;bal+=t.amt;sfx.tie()}else{t.res=-t.amt;sfx.loss();vib(70)}
-      $("msg").innerHTML=win?'<span class="win">Won '+money(t.res)+" on "+t.asset+'</span>':tie?"Returned "+money(t.amt):'<span class="loss">Lost '+money(t.amt)+" on "+t.asset+'</span>'}});
-  if(ch)render();
+    if(now>=t.end){
+      if(now-t.end>4000){t.chk=1;priceAt(t.asset,Math.floor(t.end/1000)).then(px=>{finishTrade(t,px,true);toast(t.asset+" trade finished while you were away: "+(t.res>0?"+":"")+money(t.res));render();persist()});return}
+      finishTrade(t,price(t.asset),false);ch=true}});
+  if(ch){render();persist()}
   for(const k in alerts){const L=alerts[k];if(!L.length||!ticks[k])continue;const p=price(k);
-    for(let i=L.length-1;i>=0;i--){const s=p>L[i].p?1:-1;if(s!==L[i].side){toast("\u{1F514} "+k+" reached "+L[i].p.toFixed(assets[k].d));sfx.alert();L.splice(i,1)}}}}
+    for(let i=L.length-1;i>=0;i--){const s=p>L[i].p?1:-1;if(s!==L[i].side){toast("\u{1F514} "+k+" reached "+L[i].p.toFixed(assets[k].d));sfx.alert();L.splice(i,1);updBell()}}}}
+/* ---- keep the user's data on this device ---- */
+const UK="hb-user-v1";
+function persist(){try{localStorage.setItem(UK,JSON.stringify({v:1,bal,trades:trades.slice(-200).map(t=>{const r=Object.assign({},t);delete r.chk;delete r.b;return r}),tabs,cur,tf,ctype,exp,timeMode,amt,amtMode,pct,act,ind,draws,alerts}))}catch(e){}}
+function restore(){try{const o=JSON.parse(localStorage.getItem(UK)||"null");if(!o||o.v!==1)return;
+  if(typeof o.bal==="number"&&isFinite(o.bal))bal=o.bal;if(Array.isArray(o.trades))trades=o.trades.filter(t=>t&&assets[t.asset]);
+  if(Array.isArray(o.tabs)){const tt=o.tabs.filter(n=>assets[n]);if(tt.length)tabs=tt}if(o.cur&&assets[o.cur])cur=o.cur;if(!tabs.includes(cur))tabs.push(cur);
+  if(TFS.includes(o.tf))tf=o.tf;if(["candle","ha","line","area"].includes(o.ctype))ctype=o.ctype;
+  if(EXPS.includes(o.exp))exp=o.exp;if(o.timeMode==="clock"||o.timeMode==="timer")timeMode=o.timeMode;if(typeof o.clockT==="number")clockT=o.clockT;
+  if(o.amt>0)amt=o.amt;if(o.amtMode==="pct"||o.amtMode==="amt")amtMode=o.amtMode;if(o.pct>0&&o.pct<=100)pct=o.pct;
+  if(Array.isArray(o.act))act=o.act.filter(k=>IND[k]);if(o.ind){ind.snr=!!o.ind.snr;ind.pat=!!o.ind.pat}
+  if(o.draws)for(const k in o.draws)if(assets[k])draws[k]=o.draws[k];if(o.alerts)for(const k in o.alerts)if(assets[k])alerts[k]=o.alerts[k]}catch(e){}}
+function syncUI(){$("bTf").textContent=tfl(tf);[...$("mTf").children].forEach(x=>x.classList.toggle("on",+x.dataset.s===tf));[...$("mType").children].forEach(x=>x.classList.toggle("on",x.dataset.v===ctype));indList();if(timeMode==="clock")clockT=nextMin(Date.now()+30000)}
 function showSent(){const s=assets[cur].s;$("vsR").style.height=s+"%";$("vsG").style.height=(100-s)+"%";$("vsT").textContent=s+"%";$("vsB").textContent=(100-s)+"%"}
 function drift(){if(SRV){showSent();return}for(const k in ticks){const a=assets[k],t=a.mode==="up"?38:a.mode==="down"?62:50;a.s=Math.round(Math.min(70,Math.max(30,a.s+(t-a.s)*.15+rnd()*3)))}showSent()}
 /* ---- payouts change every 5 minutes ---- */
@@ -729,7 +760,7 @@ function payTick(){if(SRV)return;const s=Math.floor(Date.now()/300000);if(s===pa
   renderTabs();updPanel();toast("Payouts updated")}
 /* ---- tabs + pairs ---- */
 function renderTabs(){$("tabs").innerHTML=tabs.map(n=>`<div class="tab${n===cur?" on":""}" data-n="${n}" role="button" tabindex="0">${flags(n)}<span><b>${n}</b><em>${Math.round(assets[n].pay*100)}%</em></span>${n===cur&&tabs.length>1?'<i class="x" data-x="1" title="Close">\u00d7</i>':""}</div>`).join("");const o=$("tabs").querySelector(".on");if(o)o.scrollIntoView({block:"nearest",inline:"nearest"})}
-function switchPair(n){if(!tabs.includes(n)){tabs.push(n);if(tabs.length>12){const i=tabs.findIndex(x=>x!==n&&x!==cur);if(i>=0)tabs.splice(i,1)}}cur=n;ensure(n);connect();off=0;anc=0;yfix=null;tmp=null;renderTabs();updPanel();showSent();updBell();draw()}
+function switchPair(n){if(!tabs.includes(n)){tabs.push(n);if(tabs.length>12){const i=tabs.findIndex(x=>x!==n&&x!==cur);if(i>=0)tabs.splice(i,1)}}cur=n;ensure(n);connect();if(SRV&&ticks[n]&&Date.now()/1000-ticks[n][ticks[n].length-1].t>5)loadHist(n);off=0;anc=0;yfix=null;tmp=null;renderTabs();updPanel();showSent();updBell();draw()}
 $("tabs").onclick=e=>{const t=e.target.closest(".tab");if(!t)return;const n=t.dataset.n;
   if(e.target.dataset.x){const i=tabs.indexOf(n);tabs.splice(i,1);connect();switchPair(tabs[Math.max(0,i-1)])}else if(n!==cur)switchPair(n)};
 let pTab="cur",pSort="pay",pDir=-1,pFav=false;
@@ -783,8 +814,8 @@ $("sbHist").onclick=()=>{const cl=trades.filter(t=>!t.open),w=cl.filter(t=>t.res
   $("hdlg").showModal()};
 $("hdx").onclick=()=>$("hdlg").close();
 $("accb").onclick=e=>{e.stopPropagation();$("accm").hidden=!$("accm").hidden;$("nb").value=Math.round(bal)};
-$("nbc").onclick=()=>{const v=+$("nb").value;if(v>=1&&v<=1000000){bal=Math.round(v*100)/100;render();toast("Demo balance set to "+money(bal));$("accm").hidden=true}else{sfx.err();toast("Enter a value from 1 to 1,000,000")}};
-$("reset").onclick=()=>{bal=10000;trades=[];$("msg").textContent="Balance reset to $10,000.00.";render();$("accm").hidden=true};
+$("nbc").onclick=()=>{const v=+$("nb").value;if(v>=1&&v<=1000000){bal=Math.round(v*100)/100;render();persist();toast("Demo balance set to "+money(bal));$("accm").hidden=true}else{sfx.err();toast("Enter a value from 1 to 1,000,000")}};
+$("reset").onclick=()=>{bal=10000;trades=[];$("msg").textContent="Balance reset to $10,000.00.";render();persist();$("accm").hidden=true};
 /* ---- sheets & menus ---- */
 function closeMenus(){document.querySelectorAll(".menu,.sheet").forEach(m=>m.hidden=true)}
 $("mTf").innerHTML=TFS.map(s=>`<button data-s="${s}">${tfl(s)}</button>`).join("");
@@ -863,18 +894,30 @@ cv.addEventListener("pointermove",e=>{hov=pos(e);
   ptrs.delete(e.pointerId);if(!ptrs.size)dragging=false;pd=0;lx=e.clientX;if(tool==="cursor")cv.style.cursor="grab"}));
 cv.addEventListener("pointerleave",()=>{hov=null;req()});
 window.addEventListener("resize",req);
+window.addEventListener("pagehide",()=>persist());
+document.addEventListener("visibilitychange",()=>{if(document.hidden)persist();else if(SRV){const a=ticks[cur];if(a&&Date.now()/1000-a[a.length-1].t>5)loadHist(cur)}});
+document.addEventListener("gesturestart",e=>e.preventDefault());
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
 let dip=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();dip=e;$("sInst").hidden=false});
 $("sInst").onclick=()=>{if(dip){dip.prompt();dip=null;$("sInst").hidden=true}};
 /* ---- start ---- */
 (async function boot(){
-  if(API!==null){try{const ctl=new AbortController();setTimeout(()=>ctl.abort(),4000);const r=await fetch(API+"/api/pairs",{cache:"no-store",signal:ctl.signal}),j=await r.json();if(j&&j.pairs&&j.pairs.length>10){SRV=true;applyMeta(j)}}catch(e){}}
+  restore();
+  if(API!==null){
+    $("boot").hidden=false;let useLocal=false;const sl=ms=>new Promise(r=>setTimeout(r,ms));$("bootL").onclick=()=>{useLocal=true};const t0=Date.now();
+    while(!SRV&&!useLocal){
+      try{const ctl=new AbortController();setTimeout(()=>ctl.abort(),8000);const r=await fetch(API+"/api/pairs",{cache:"no-store",signal:ctl.signal}),j=await r.json();if(j&&j.pairs&&j.pairs.length>10){SRV=true;applyMeta(j);break}}catch(e){}
+      if(Date.now()-t0>9000){$("bootS").textContent="The server is waking up. This can take up to a minute. Your balance and trades are saved on this device.";$("bootL").hidden=false}
+      await sl(2500)}
+    $("boot").hidden=true}
+  syncUI();
   if(SRV){ensure=srvEnsure;advance=function(){};backfill=srvBack}
   tabs.forEach(ensure);ensure(cur);
   if(SRV){await loadHist(cur);connect();tabs.forEach(k=>{if(k!==cur)loadHist(k)});setInterval(refreshMeta,60000)}
 renderTabs();updPanel();showSent();sndLabel();setTool("cursor");applySet();clock();render();draw();
 setInterval(()=>{if(!SRV)advance();settle()},250);
 const FR=(window.matchMedia&&matchMedia("(max-width:900px)").matches)?40:28;let lastF=0;function loop(ts){requestAnimationFrame(loop);if(ts-lastF<FR)return;const dt=Math.min(.25,Math.max(.001,(ts-lastF)/1000));lastF=ts;easeStep(dt);draw()}
-easeStep(.001);requestAnimationFrame(loop);setInterval(drift,2500);setInterval(renderRows,500);setInterval(()=>{clock();updPanel();updBell()},1000);setInterval(payTick,1000);
+easeStep(.001);requestAnimationFrame(loop);setInterval(drift,2500);setInterval(renderRows,500);setInterval(()=>{clock();updPanel();updBell()},1000);setInterval(persist,4000);setInterval(payTick,1000);
 
 })();
 
